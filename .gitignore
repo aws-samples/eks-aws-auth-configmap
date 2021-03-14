@@ -1,0 +1,10 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+.DS_Store
+.idea/*
+Config/*
+*.zip
+
+
