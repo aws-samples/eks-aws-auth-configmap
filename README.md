@@ -87,7 +87,7 @@ https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
     * To access k8s through api, you always need auth config setup. So, both samples are clubbed together to help end to end flow.
 * Every time when I run this example, it overwrites aws auth ConfigMap. why?
     * This sample code is to demonstrate how aws auth ConfigMap can be applied programmatically. Please modify code based on your requirement.
-* When I run Lambda function, I get 'error: You must be logged in to the server (Unauthorized)'?
+* When I run Lambda function, I get error "You must be logged in to the server (Unauthorized)"?
     * When you create an Amazon EKS cluster, the IAM entity user or role, such as a federated user that creates the cluster, is automatically granted system:masters permissions in the cluster's RBAC configuration in the control plane. So, for Lambda execution role make sure to provide EKS Cluster permission by either running standalone program or manually editing auth ConfigMap.
     
 ## License
