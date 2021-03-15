@@ -7,13 +7,13 @@ This package provides code(api/programmatic way) for
 
 Code can be run without installing or depending on aws commnd line interface (cli) and kubectl cli. Code uses AWS SDK for Python (Boto3), AWS Security Token Service API and Kubernetes(k8s) API to achieve this.
 
-## Scenario:
+## Scenario
 For security reasons, when you create an Amazon EKS cluster, only the IAM entity user or role, such as a federated user that creates the cluster, is granted permissions in the cluster's RBAC configuration in the control plane. User or role that created cluster has to login through kubectl to provide cluster access to additional users/roles.
 
-### Issue:
+### Issue
 For automation like build pipeline or infrastructure as code, there is a dependency on kubectl, aws cli to apply aws auth ConfigMap. Also for a scenario where we need to standup large number of EKS clusters for training/learning purpose or for DR automation one has to automate with dependency on kubectl cli.
 
-### Approach to solve the problem/used in this sample:
+### Approach to solve the problem/used in this sample
  Create custom http request/api that generates token/sts signed url for EKS and generating kubeconfig in temporary folder. This way, automation can be done in lambda or any other automation tools/application without need to have CLI dependency or invoking through command line interface.
 
 ### Use Cases where this can be used
