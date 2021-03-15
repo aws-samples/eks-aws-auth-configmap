@@ -7,13 +7,13 @@ This package provides code(api/programmatic way) for
 
 Code can be run without installing or depending on aws commnd line interface (cli) and kubectl cli. Code uses AWS SDK for Python (Boto3), AWS Security Token Service API and Kubernetes(k8s) API to achieve this.
 
-##Scenario:
+## Scenario:
 For security reasons, when you create an Amazon EKS cluster, only the IAM entity user or role, such as a federated user that creates the cluster, is granted permissions in the cluster's RBAC configuration in the control plane. User or role that created cluster has to login through kubectl to provide cluster access to additional users/roles.
 
-###Issue:
+### Issue:
 For automation like build pipeline or infrastructure as code, there is a dependency on kubectl, aws cli to apply aws auth ConfigMap. Also for a scenario where we need to standup large number of EKS clusters for training/learning purpose or for DR automation one has to automate with dependency on kubectl cli.
 
-###Approach to solve the problem/used in this sample:
+### Approach to solve the problem/used in this sample:
  Create custom http request/api that generates token/sts signed url for EKS and generating kubeconfig in temporary folder. This way, automation can be done in lambda or any other automation tools/application without need to have CLI dependency or invoking through command line interface.
 
 ### Use Cases where this can be used
@@ -23,12 +23,12 @@ For automation like build pipeline or infrastructure as code, there is a depende
 
 [//]: # (Infrastructure as Code Automation & CI/CD)
 
-###Code Flow
+### Code Flow
 Refer standalone/test.py file for available functions & its flow. Read function comments.
 
-###Installation & Run
+### Installation & Run
 
-####Standalone python
+#### Standalone python
 Pre requisites:
 
 &nbsp;&nbsp;Python 3.7
@@ -46,7 +46,7 @@ Configuration:
 * Export aws access keys and secret access keys as env variable (for standalone test)
 * Update cluster name and user/role variables value in test.py
 
-####Attention! 
+#### Attention! 
 For demo purpose, access key and secret access keys are exported as environment variables in this sample. Folow security best practice to read access key and secret access keys from secrets manager or from vault when integrating into build pipeline or application code.
 
 Run:
@@ -55,7 +55,7 @@ Run:
 
 
 
-####AWS Lambda
+#### AWS Lambda
 Pre requisites:
 
 * Create Lambda function through AWS Console or from command line
@@ -72,17 +72,17 @@ Packaging steps:
 * &nbsp;&nbsp;Note: increase default timeout for Lambda function if needed.
 * Test created Lambda function
 
-####Note:
+#### Note:
 
 * In this sample code, compatible versions of k8s client api's are used. If you change version, then test it before using it
 * This works for both role based login or user based login
 * This can be extended to add/remove users based on event.
 * Use layers in Lambda if you want to re-use or reduce size of Lambda function/zip file
 
-###References
+### References
 https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
 
-###FAQ
+### FAQ
 * Why this sample has both aws auth config map and k8s api in same package?
     * To access k8s through api, you always need auth config setup. So, both samples are clubbed together to help end to end flow.
 * Every time when I run this example, it overwrites aws auth ConfigMap. why?
